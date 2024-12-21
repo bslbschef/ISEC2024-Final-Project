@@ -1,19 +1,17 @@
-import logging
-import time
-from datetime import datetime
-
-import adafruit_dht
-import board
-
-
 class DHT22():
+    def __init__(self):
+        pass
+
     def get_humidity(self, cur_folder_path):
-        dht = adafruit_dht.DHT22(board.D18, use_pulseio=False)
+        DHT_SENSOR=Adafruit_DHT.DHT22
+        DHT_PIN=18
+        humidity, temp = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
         last_temperature = 0.0
         last_humidity = 0.0
         try:
-            last_temperature = dht.temperature
-            last_humidity = dht.humidity
+            print("Temp: {0:0.1f} °C    Humidity: {1:0.1f} % ".format(temp, humidity))
+            last_temperature = "{0:0.3f}".format(temp)
+            last_humidity = "{0:0.3f}".format(humidity)
         except RuntimeError as e:
             logging.error(f'Reading from DHT failure: {e.args}')
         finally:
@@ -25,9 +23,9 @@ class DHT22():
                     file.write(cur_time)
                     file.write(',')
                     file.write(str(last_temperature))
-                    file.write(',t,')
+                    file.write(',°C,')
                     file.write(str(last_humidity))
-                    file.write(',%,')
+                    file.write(',%')
                     file.write('\n')
                     file.flush()
             else:
