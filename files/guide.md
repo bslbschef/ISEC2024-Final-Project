@@ -33,7 +33,7 @@ __Git:__ Enter the commands below in the (XSHELL - 本地Shell) interface.
 __Figure 3.__ The schematic of [DHT22]((https://www.sparkfun.com/datasheets/Sensors/Temperature/DHT22.pdf)  ) Hygrothermograph Sensor (We only use port 1, 2 and 4).   
 __NOTE:__ I have already connected the DuPont wires for you. Just connect them directly to the Raspberry Pi pins!  
 __HowToUse:__   
-- __Port 1 (VCC):__ Connected to pin 2 (gray) in Figure 1.   
+- __Port 1 (VCC):__ Connected to pin 4 (gray) in Figure 1.   
 - __Port 2 (Data):__ Connected to pin 12 (gray) in Figure 1.  
 - __Port 4 (GND):__ Connected to pin 6 (gray) in Figure 1.  
 ### 3.2. BMP280   
