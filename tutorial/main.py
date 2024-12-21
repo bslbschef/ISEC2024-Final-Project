@@ -32,7 +32,7 @@ def init_logging(root_path):
     logger.addHandler(file_handler)
 
 if __name__ == "__main__":
-    root_path = '/usr/local/course/final_proj'
+    root_path = '/usr/local/project'
     init_logging(root_path)
     cf = CreateFolder(root_path)
     cf.initialize()
