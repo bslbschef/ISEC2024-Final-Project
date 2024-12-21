@@ -1,0 +1,14 @@
+smbus2
+pyserial
+adafruit-circuitpython-bmp280
+busio
+pip install board
+pip install adafruit-circuitpython-bmp280 [adafruit_bmp280]
+pip install adafruit-extended-bus  [busio]
+
+import adafruit_dht
+import board
+
+sudo python3 xx.py
+
+[pressure模块，不要用热熔胶，会无法连接！多试几次才行，不要用热熔胶粘！见桌面截图]
