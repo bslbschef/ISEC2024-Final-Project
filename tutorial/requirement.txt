@@ -12,3 +12,26 @@ import board
 sudo python3 xx.py
 
 [pressure模块，不要用热熔胶，会无法连接！多试几次才行，不要用热熔胶粘！见桌面截图]
+===============================
+===============================
+Ubuntu20默认为安装pip,需要手动安装： 
+sudo apt-get update
+sudo apt-get install python3-pip
+
+sudo pip install Adafruit_DHT
+sudo pip install adafruit-blinka
+
+sudo apt-get update
+sudo apt-get install python3-rpi.gpio
+
+-------------------
+pip install adafruit-circuitpython-dht
+pip install adafruit-blinka
+sudo apt-get update
+sudo apt-get install libgpiod2
+pip install --upgrade adafruit-blinka
+pip install --upgrade adafruit-circuitpython-dht
+gpio readall
+sudo apt install wiringpi
+--感觉关键是换了个函数
+import Adafruit_DHT
