@@ -90,4 +90,4 @@ class wind_speed():
         logging.info('=============Wind Speed data start to record!=============')
         while True:
             self.read_wind_speed(serial_port, cur_folder_path)
-            time.sleep(0.5)
+            time.sleep(1)

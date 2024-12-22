@@ -115,4 +115,4 @@ class wind_direction():
         logging.info('=============Wind Direction data start to record!=============')
         while True:
             self.read_wind_direction(serial_port, cur_folder_path)
-            time.sleep(0.5)
+            time.sleep(1)
