@@ -43,4 +43,4 @@ class DHT22():
         logging.info('=============DHT22 data start to record!=============')
         while True:
             self.get_humidity(cur_folder_path)
-            time.sleep(1)
+            time.sleep(2)
