@@ -32,11 +32,11 @@ def init_logging(root_path):
     logger.addHandler(file_handler)
 
 if __name__ == "__main__":
-    root_path = '/usr/local/project'
-    init_logging(root_path)
+    root_path = '/usr/local/project/ISEC2024-Final-Project/'
     cf = CreateFolder(root_path)
     cf.initialize()
     cur_folder_path = cf.get_current_storage_path()
+    init_logging(root_path)
     logging.info('create storage dir:' + cur_folder_path)
 
     logging.info('=============start to record the sensor data=============')
