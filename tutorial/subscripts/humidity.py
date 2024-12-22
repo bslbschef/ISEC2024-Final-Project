@@ -1,6 +1,7 @@
 import logging
 from datetime import datetime
 import Adafruit_DHT
+import time
 
 
 class DHT22():
@@ -12,10 +13,8 @@ class DHT22():
         DHT_PIN=18
         try:
             humidity, temp = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
-            last_temperature = 0.0
-            last_humidity = 0.0
             #print("Temp: {0:0.1f} °C    Humidity: {1:0.1f} % ".format(temp, humidity))
-            logging.info("Temp: {0:0.1f} °C    Humidity: {1:0.1f} % ".format(temp, humidity))
+            #logging.info("Temp: {0:0.1f} °C    Humidity: {1:0.1f} % ".format(temp, humidity))
             last_temperature = "{0:0.3f}".format(temp)
             last_humidity = "{0:0.3f}".format(humidity)
         except RuntimeError as e:
@@ -23,8 +22,7 @@ class DHT22():
         finally:
             if last_temperature and last_humidity is not None:
                 # 保存
-                with open(cur_folder_path + "/temperature_and_humidity_data.txt",
-                          "a") as file:
+                with open(cur_folder_path + "/temperature_and_humidity_data.txt", "a") as file:
                     cur_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
                     file.write(cur_time)
                     file.write(',')
@@ -37,5 +35,7 @@ class DHT22():
             else:
                 logging.info("can not receive humidity data, check the connection!")
     def method1(self, cur_folder_path):
+        logging.info('=============DHT22 data start to record!=============')
         while True:
             self.get_humidity(cur_folder_path)
+            time.sleep(0.5)

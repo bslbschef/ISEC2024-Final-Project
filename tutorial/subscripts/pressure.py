@@ -1,6 +1,7 @@
 import logging
 from datetime import datetime
 import smbus
+import time
 
 
 # BMP280 iic address.
@@ -167,7 +168,8 @@ class BMP280(object):
         else:
             logging.info("can not receive pressure data, check the connection!")
     def method2(self, cur_folder_path):
+        logging.info('=============BMP280 data start to record!=============')
         while True:
             self.get_temperature_pressure(cur_folder_path)
-
+            time.sleep(0.5)
 

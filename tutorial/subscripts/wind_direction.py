@@ -2,6 +2,7 @@ import logging
 from datetime import datetime
 import serial
 import struct
+import time
 
 
 # CRC16校验计算函数
@@ -71,18 +72,18 @@ class wind_direction():
         try:
             # 打开串口
             ser = serial.Serial(serial_port, baudrate=4800, bytesize=8, parity='N', stopbits=1, timeout=1)
-            logging.info('serial port is opening: '+serial_port)
+            #logging.info('serial port is opening: '+serial_port)
 
             # 构建读取指令帧
             request_frame = self.build_read_frame(device_address, function_code, start_address, data_length)
-            logging.info('send the reading frame: ' + request_frame.hex(' '))
+            #logging.info('send the reading frame: ' + request_frame.hex(' '))
 
             # 发送指令
             ser.write(request_frame)
 
             # 接收应答帧
             response = ser.read(7)  # 应答帧长度为7字节
-            logging.info('receive the responding frame: ' + response.hex(' '))
+            #logging.info('receive the responding frame: ' + response.hex(' '))
 
             # 解析风向数据
             wind_direction = self.parse_response(response)
@@ -111,6 +112,7 @@ class wind_direction():
 
     def method4(self, cur_folder_path):
         serial_port = "/dev/ttyUSB1"
+        logging.info('=============Wind Direction data start to record!=============')
         while True:
             self.read_wind_direction(serial_port, cur_folder_path)
-
+            time.sleep(0.5)
