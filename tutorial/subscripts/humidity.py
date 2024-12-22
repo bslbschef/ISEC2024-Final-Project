@@ -15,6 +15,7 @@ class DHT22():
             last_temperature = 0.0
             last_humidity = 0.0
             #print("Temp: {0:0.1f} °C    Humidity: {1:0.1f} % ".format(temp, humidity))
+            logging.info("Temp: {0:0.1f} °C    Humidity: {1:0.1f} % ".format(temp, humidity))
             last_temperature = "{0:0.3f}".format(temp)
             last_humidity = "{0:0.3f}".format(humidity)
         except RuntimeError as e:

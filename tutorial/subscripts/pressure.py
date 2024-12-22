@@ -1,7 +1,6 @@
 import logging
 from datetime import datetime
 import smbus
-import time
 
 
 # BMP280 iic address.
