@@ -35,3 +35,29 @@ gpio readall
 sudo apt install wiringpi
 --感觉关键是换了个函数
 import Adafruit_DHT
+--------------------
+
+sudo apt-get install python3-smbus
+sudo pip install smbus2
+
+由于Ubuntu系统没有开启I2C功能，所以无法使用BMP280，需要开启后才行
+sudo vim /boot/firmware/config.txt
+在末尾添加：
+dtparam=i2c_arm=on
+dtparam=i2c_vc=on
+重启：
+sudo reboot
+查看是否有地址：This command should show a grid of I2C addresses. Your BMP280 should appear at either 0x76 or 0x77. 
+没有说明硬件没接好（最好是焊接）
+sudo i2cdetect -y 1
+-----------------------------------
+wind speed
+sudo pip install pyserial
+--------------------
+修改时间
+sudo dpkg-reconfigure tzdata
+----------------------------------
+wind direction
+--------------------
+查看usb端口
+ls /dev/ttyUSB*

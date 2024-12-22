@@ -14,7 +14,7 @@ class DHT22():
             humidity, temp = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
             last_temperature = 0.0
             last_humidity = 0.0
-            #print("Temp: {0:0.1f} °C    Humidity: {1:0.1f} % ".format(temp, humidity))
+            print("Temp: {0:0.1f} °C    Humidity: {1:0.1f} % ".format(temp, humidity))
             last_temperature = "{0:0.3f}".format(temp)
             last_humidity = "{0:0.3f}".format(humidity)
         except RuntimeError as e:
@@ -38,3 +38,6 @@ class DHT22():
     def method1(self, cur_folder_path):
         while True:
             self.get_humidity(cur_folder_path)
+if __name__ == "__main__":
+    dht1 = DHT22()
+    dht1.method1('/usr/local/project')

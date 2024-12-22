@@ -1,6 +1,5 @@
 import logging
 from datetime import datetime
-import time
 import serial
 import struct
 
@@ -87,16 +86,19 @@ class wind_direction():
 
             # 解析风向数据
             wind_direction = self.parse_response(response)
-            if wind_direction is not None:
+            #print("Wind direction: {0:0.3f} °".format(wind_direction))
+            wd = "{0:0.3f}".format(wind_direction)
+            if wd is not None:
                 # 保存
                 with open(cur_folder_path+"/wind_direction_data.txt", "a") as file:
                     cur_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
                     cur_dir = angle_to_wind_direction(wind_direction)
                     file.write(cur_time)
                     file.write(',')
-                    file.write(wind_direction)
-                    file.write(',')
+                    file.write(str(wd))
+                    file.write(',°,')
                     file.write(cur_dir)
+                    file.write(',十六方位角')
                     file.write('\n')
                     file.flush()
             else:

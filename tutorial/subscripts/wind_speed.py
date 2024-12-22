@@ -1,6 +1,5 @@
 import logging
 from datetime import datetime
-import time
 import serial
 import struct
 
@@ -65,13 +64,16 @@ class wind_speed():
 
             # 解析风速数据
             wind_speed = self.parse_response(response)
-            if wind_speed is not None:
+            #print("Wind speed: {0:0.3f} m/s".format(wind_speed))
+            ws = "{0:0.3f}".format(wind_speed)
+            if ws is not None:
                 # 保存
                 with open(cur_folder_path+"/wind_speed_data.txt", "a") as file:
                     cur_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
                     file.write(cur_time)
                     file.write(',')
-                    file.write(wind_speed)
+                    file.write(str(ws))
+                    file.write(',m/s')
                     file.write('\n')
                     file.flush()
             else:
@@ -86,4 +88,3 @@ class wind_speed():
         serial_port = "/dev/ttyUSB0"
         while True:
             self.read_wind_speed(serial_port, cur_folder_path)
-

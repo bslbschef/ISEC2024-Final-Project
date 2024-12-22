@@ -1,9 +1,51 @@
 import logging
 from datetime import datetime
 import smbus
-from .pressure_constant import *
 import time
 
+
+# BMP280 iic address.
+BMP280_I2C_ADDRESS = 0x76        # SDO = 0
+# Registers value
+BMP280_ID_Value = 0x58           # BMP280 ID
+BMP280_RESET_VALUE = 0xB6
+# BMP280 Registers definition
+BMP280_TEMP_XLSB_REG = 0xFC      # Temperature XLSB Register
+BMP280_TEMP_LSB_REG = 0xFB       # Temperature LSB Register
+BMP280_TEMP_MSB_REG = 0xFA       # Temperature LSB Register
+BMP280_PRESS_XLSB_REG = 0xF9     # Pressure XLSB  Register
+BMP280_PRESS_LSB_REG = 0xF8      # Pressure LSB Register
+BMP280_PRESS_MSB_REG = 0xF7      # Pressure MSB Register
+BMP280_CONFIG_REG = 0xF5         # Configuration Register
+BMP280_CTRL_MEAS_REG = 0xF4      # Ctrl Measure Register
+BMP280_STATUS_REG = 0xF3         # Status Register
+BMP280_RESET_REG = 0xE0          # Softreset Register
+BMP280_ID_REG = 0xD0             # Chip ID Register
+# calibration parameters
+BMP280_DIG_T1_LSB_REG = 0x88
+BMP280_DIG_T1_MSB_REG = 0x89
+BMP280_DIG_T2_LSB_REG = 0x8A
+BMP280_DIG_T2_MSB_REG = 0x8B
+BMP280_DIG_T3_LSB_REG = 0x8C
+BMP280_DIG_T3_MSB_REG = 0x8D
+BMP280_DIG_P1_LSB_REG = 0x8E
+BMP280_DIG_P1_MSB_REG = 0x8F
+BMP280_DIG_P2_LSB_REG = 0x90
+BMP280_DIG_P2_MSB_REG = 0x91
+BMP280_DIG_P3_LSB_REG = 0x92
+BMP280_DIG_P3_MSB_REG = 0x93
+BMP280_DIG_P4_LSB_REG = 0x94
+BMP280_DIG_P4_MSB_REG = 0x95
+BMP280_DIG_P5_LSB_REG = 0x96
+BMP280_DIG_P5_MSB_REG = 0x97
+BMP280_DIG_P6_LSB_REG = 0x98
+BMP280_DIG_P6_MSB_REG = 0x99
+BMP280_DIG_P7_LSB_REG = 0x9A
+BMP280_DIG_P7_MSB_REG = 0x9B
+BMP280_DIG_P8_LSB_REG = 0x9C
+BMP280_DIG_P8_MSB_REG = 0x9D
+BMP280_DIG_P9_LSB_REG = 0x9E
+BMP280_DIG_P9_MSB_REG = 0x9F
 
 class BMP280(object):
     def __init__(self, address=BMP280_I2C_ADDRESS):
@@ -108,8 +150,9 @@ class BMP280(object):
             adc_P)          # pressure compensate
 
         # save as file
-        temper = temperature
-        kpress = pressure / 1000
+        temper = "{0:0.3f}".format(temperature)
+        kpress = "{0:0.3f}".format(pressure / 1000)
+        #print("Temp: "+temper+" °C    Pressure: "+kpress+" kPa")
         if temper and kpress is not None:
             # 保存
             with open(cur_folder_path + "/temperature_and_pressure_data.txt", "a") as file:
@@ -117,9 +160,9 @@ class BMP280(object):
                 file.write(cur_time)
                 file.write(',')
                 file.write(temper)
-                file.write(',t,')
+                file.write(',°C,')
                 file.write(kpress)
-                file.write(',kpa,')
+                file.write(',kPa')
                 file.write('\n')
                 file.flush()
         else:
@@ -128,17 +171,4 @@ class BMP280(object):
         while True:
             self.get_temperature_pressure(cur_folder_path)
 
-# if __name__ == '__main__':
-#
-#     import time
-#
-#     print("BMP280 Test Program ...\n")
-#
-#     bmp280 = BMP280()
-#
-#     while True:
-#         time.sleep(1)
-#         temperature, pressure = bmp280.method2()
-#         print(' Temperature = %.2f C Pressure = %.3f kPa' %
-#               (temperature, pressure/1000))
-#
+
