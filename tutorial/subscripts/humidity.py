@@ -15,8 +15,13 @@ class DHT22():
             humidity, temp = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
             #print("Temp: {0:0.1f} °C    Humidity: {1:0.1f} % ".format(temp, humidity))
             #logging.info("Temp: {0:0.1f} °C    Humidity: {1:0.1f} % ".format(temp, humidity))
-            last_temperature = "{0:0.3f}".format(temp)
-            last_humidity = "{0:0.3f}".format(humidity)
+            if humidity is None or temp is None:
+                logging.info('Humidity or Temp data is None, check the hardware connection!!!')
+                last_temperature = 0.00
+                last_humidity = 0.00
+            else:
+                last_temperature = "{0:0.3f}".format(temp)
+                last_humidity = "{0:0.3f}".format(humidity)
         except RuntimeError as e:
             logging.error(f'Reading from DHT failure: {e.args}, Check hardware connection!')
         finally:
