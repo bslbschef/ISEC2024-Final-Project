@@ -61,3 +61,5 @@ wind direction
 --------------------
 查看usb端口
 ls /dev/ttyUSB*
+------------------
+先插入风速仪--ttyusb0, 然后是风向仪--ttyusb1
