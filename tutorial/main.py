@@ -43,8 +43,7 @@ if __name__ == "__main__":
     for cls in classes:
         thread = threading.Thread(target=thread_function, args=(cls,cur_folder_path))
         threads.append(thread)
-        thread.start() # 启动线程
+        thread.start() 
     
-    # for thread in threads:
-    #     thread.join()  # 阻塞主进程，直到所有线程都完成
-
+    for thread in threads:
+        thread.join()  
