@@ -171,5 +171,5 @@ class BMP280(object):
         logging.info('=============BMP280 data start to record!=============')
         while True:
             self.get_temperature_pressure(cur_folder_path)
-            time.sleep(1)
+            time.sleep(2)
 
