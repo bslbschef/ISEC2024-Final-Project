@@ -10,6 +10,7 @@ class DHT22():
 
     def get_humidity(self, cur_folder_path):
         DHT_SENSOR=Adafruit_DHT.DHT22
+        time.sleep(2)
         DHT_PIN=18
         last_temperature = 0.00
         last_humidity = 0.00
@@ -43,4 +44,4 @@ class DHT22():
         logging.info('=============DHT22 data start to record!=============')
         while True:
             self.get_humidity(cur_folder_path)
-            time.sleep(2)
+            #time.sleep(2)
